@@ -1,11 +1,15 @@
 
 import './App.css';
 import React from 'react';
+import Header from './header/Header';
 
-function App() {
+export default function App() {
   return (
-    <div id="content"></div>
+    <div id="content">
+        <Header></Header>
+        
+    </div>
   );
 }
 
-export default App;
+
