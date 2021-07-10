@@ -9,6 +9,7 @@ header {
     position: relative;
     border: 10px solid gray;
     border-right: none;
+    border-top: none;
 }
 
 header div {
@@ -29,7 +30,8 @@ header div h1 {
     left: 5%;
     top: 10%;
     padding: 10px;
-    font-size: 5vh;
+    font-size: 5vmin;
     background-color: turquoise;
     border: 10px solid green;
+    border-radius: 5%;
 }

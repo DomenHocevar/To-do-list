@@ -4,7 +4,7 @@ import ToDoWithKey from "./ToDoWithKey";
 export default function Project(inputTitle, inputKey) {
     const title = inputTitle;
     const toDos = [];
-    const key = 0;
+    const key = inputKey;
     let nextToDoKey = 0;
 
     function addToDo(toDo) {
@@ -22,4 +22,6 @@ export default function Project(inputTitle, inputKey) {
         }
         toDos.splice(target, 1);
     }
+
+    return {title, toDos, key, addToDo, removeToDo};
 }
