@@ -1,0 +1,16 @@
+
+#projectForm {
+    display: flex;
+    flex-direction: column;
+    
+    min-height: 80px;
+}
+
+#projectForm > h3 {
+    margin-top: 0;
+    text-align: center;
+}
+#projectForm > input[type="submit"] {
+    margin-top: 10px;
+    align-self: flex-end;
+}

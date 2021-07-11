@@ -12,7 +12,7 @@ export default function Sidebar(props) {
     return (
         <section id="sidebarSection">
             <h2>
-                Projects: 
+                Projects: <button onClick={props.turnOnProjectForm}>+</button>
             </h2>
             {getProjectComponents(props.projects)}
         </section>

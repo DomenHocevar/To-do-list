@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 export default function ProjectDropDown(props) {
     
     function getHeadingComponent(project) {
-        return <button>{project.title}</button>;
+        return <button style={{cursor:"pointer"}}>{project.title}</button>;
     }
 
     function getChildrenComponents(project) {

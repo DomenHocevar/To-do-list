@@ -5,28 +5,47 @@ import Header from './header/Header';
 import Sidebar from './sidebar/Sidebar';
 import Project from 'logic/Project';
 import ToDo from 'logic/ToDo';
+import ProjectsStorage from 'logic/ProjectsStorage';
+import FormContainer from './forms/FormContainer';
+import ProjectForm from './forms/projectForm/ProjectForm';
 
 export default function App() {
-  const [projects, setProjects] = useState(getProjects());
+  const [projectsStorage, setProjectsStorage] = useState(initProjectsStorage());
+  const [showFormType, setShowFormType] = useState("");
 
-  function getProjects() {
-    const projects = [];
-    projects.push(Project("Ababd", 0));
-    projects[0].addToDo(ToDo());
-    projects[0].toDos[0].title ="lmao";
-    projects.push(Project("Efdsfds", 1));
-    projects[1].addToDo(ToDo());
-    projects[1].toDos[0].title ="heh";
-    projects[1].addToDo(ToDo());
-    projects[1].toDos[1].title ="ojj";
-    console.log(projects);
-    return projects;
+  function initProjectsStorage() {
+    const projectsStorage = ProjectsStorage();
+    projectsStorage.addProject("Default");
+    return projectsStorage;
+  }
+
+  function turnOnProjectForm() {
+    setShowFormType("project");
+  }
+
+  function turnOffForm() {
+    setShowFormType("");
+  }
+
+  function handleFormSubmit(type, attributesObject) {
+    if (type == "project") {
+      const projectsStorageCopy = Object.assign({}, projectsStorage);
+      projectsStorageCopy.addProject(attributesObject.title);
+      setProjectsStorage(projectsStorageCopy);
+
+    } else if (type == "toDo") {
+
+    }
   }
 
   return (
+
     <div id="content">
+        {console.log(projectsStorage.projects)}
         <Header/>
-        <Sidebar projects={projects}/>
+        <Sidebar projects={projectsStorage.projects}
+        turnOnProjectForm={turnOnProjectForm}/>
+        {showFormType === "project" && <FormContainer turnOffProjectForm={turnOffForm} form={<ProjectForm onSubmit={handleFormSubmit} turnOffProjectForm={turnOffForm}/>}/>}
     </div>
   );
 }
