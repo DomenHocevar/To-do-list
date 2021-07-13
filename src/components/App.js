@@ -8,14 +8,24 @@ import ToDo from 'logic/ToDo';
 import ProjectsStorage from 'logic/ProjectsStorage';
 import FormContainer from './forms/FormContainer';
 import ProjectForm from './forms/projectForm/ProjectForm';
+import ToDosSection from './toDosDisplay/ToDosSection';
 
 export default function App() {
   const [projectsStorage, setProjectsStorage] = useState(initProjectsStorage());
   const [showFormType, setShowFormType] = useState("");
+  const [showProject, setShowProject] = useState(null);
+  if (projectsStorage.projects.length != 0) {
+    if (showProject === null) {
+      setShowProject(projectsStorage.projects[0]);
+    }
+  } else {
+    setShowProject(null);
+  }
 
   function initProjectsStorage() {
     const projectsStorage = ProjectsStorage();
     projectsStorage.addProject("Default");
+    
     return projectsStorage;
   }
 
@@ -38,13 +48,25 @@ export default function App() {
     }
   }
 
+  function handleProjectClick(project) {
+    setShowProject(project);
+  }
+
+
+  let showProjectKey = null;
+  if (showProject != null) showProjectKey = showProject.key;
   return (
 
     <div id="content">
         {console.log(projectsStorage.projects)}
         <Header/>
-        <Sidebar projects={projectsStorage.projects}
-        turnOnProjectForm={turnOnProjectForm}/>
+        <div id="sidebarAndToDosSection">
+          <Sidebar projects={projectsStorage.projects}
+          turnOnProjectForm={turnOnProjectForm}
+          onProjectClick={handleProjectClick}
+          showProjectKey={showProjectKey}/>
+          <ToDosSection project={showProject}/>
+        </div>
         {showFormType === "project" && <FormContainer turnOffProjectForm={turnOffForm} form={<ProjectForm onSubmit={handleFormSubmit} turnOffProjectForm={turnOffForm}/>}/>}
     </div>
   );

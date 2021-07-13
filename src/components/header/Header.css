@@ -1,7 +1,7 @@
 
 
 header {
-    background-color: black;
+    background-color: rgb(100, 41, 41);
     color: white;
     margin: 0;
     padding: 0;
@@ -21,7 +21,7 @@ header div {
     margin: 0;
     width: 90%;
     height: 60%;
-    background-color: rgb(211, 211, 8);
+    background-color: rgb(207, 169, 97);
 }
 
 header div h1 {
@@ -31,7 +31,7 @@ header div h1 {
     top: 10%;
     padding: 10px;
     font-size: 5vmin;
-    background-color: turquoise;
+    background-color: rgb(45, 101, 138);
     border: 10px solid green;
     border-radius: 5%;
 }

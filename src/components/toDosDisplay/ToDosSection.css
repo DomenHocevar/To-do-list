@@ -1,0 +1,11 @@
+
+#toDosSection > h2 {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+#toDosSection {
+    text-align: center;
+    background-image: url("../../images/blueBackground.jpeg");
+    flex: 1;
+}
