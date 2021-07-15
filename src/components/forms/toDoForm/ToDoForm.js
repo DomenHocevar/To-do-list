@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ToDoForm.css";
+import "../buttonStyles.css"
 
 export default function ToDoForm(props) {
     const [toDoTitleInput, setToDoTitleInput] = useState((props.editedToDo) ? props.editedToDo.title : "");
@@ -53,13 +54,13 @@ export default function ToDoForm(props) {
             value={priorityInput}
             min="1" max="3"/></label>
 
-            <label htmlFor="descriptionInput" id="descriptionInputLabel"><span>Description:</span> <textarea id="descriptionInput" onChange={(event) => handleDescriptionChange(event)}
+            <label htmlFor="descriptionInput" className="putTextAtTopOfInputLabel"><span>Description:</span> <textarea id="descriptionInput" onChange={(event) => handleDescriptionChange(event)}
             value={descriptionInput}/></label>
 
             <label htmlFor="dateInput">Date: <input id="dateInput" type="date" onChange={(event) => handleDateChange(event)}
             value={dateInput}/></label>
 
-            <label htmlFor="doneInput">Done: <input id="doneInput" type="checkbox" onChange={(event) => handleDoneChange(event)}
+            <label htmlFor="doneInput" className="putTextAtTopOfInputLabel"> <span>Done: </span> <input id="doneInput" type="checkbox" onChange={(event) => handleDoneChange(event)}
             checked={doneInput}/></label>
 
             <input type="submit" value="Submit" className="submitButton"/>

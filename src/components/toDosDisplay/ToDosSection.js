@@ -1,4 +1,5 @@
 import React from "react";
+import ToDosByPriority from "./ToDosByPriority";
 import "./ToDosSection.css";
 
 export default function ToDosSection(props) {
@@ -12,6 +13,11 @@ export default function ToDosSection(props) {
                     Add a ToDo
                 </button>
             </h2>
+            <div id="toDosContainer">
+                <ToDosByPriority/>
+                <ToDosByPriority/>
+                <ToDosByPriority/>
+            </div>
         </section>
     );
 }
