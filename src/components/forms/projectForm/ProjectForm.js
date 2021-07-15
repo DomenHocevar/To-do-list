@@ -3,24 +3,19 @@ import "./ProjectForm.css";
 import "../buttonStyles.css";
 
 export default function ProjectForm(props) {
-    const [projectNameInput, setProjectNameInput] = useState("");
+    const [projectTitleInput, setProjectTitleInput] = useState("");
 
     function handleChange(event) {
-        setProjectNameInput(event.target.value);
+        setProjectTitleInput(event.target.value);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
 
-        if (projectNameInput === "") {
-            alert("Project name should not be left empty!");
-            return;
-        }
-
         const attributesObject = {
-            title: projectNameInput
+            title: projectTitleInput
         }
-        props.onSubmit("project", attributesObject);
+        props.onSubmit(attributesObject);
         props.turnOffProjectForm();
     }
 
@@ -29,7 +24,8 @@ export default function ProjectForm(props) {
             <h3>
                 Create a project:
             </h3>
-            <label htmlFor="projectNameInput">Project name: <input id="projectNameInput" type="text" onChange={(event) => handleChange(event)}/></label>
+            <label htmlFor="projectTitleInput">Project title: <input id="projectTitleInput" type="text" onChange={(event) => handleChange(event)}
+            value={projectTitleInput} required/></label>
             <input type="submit" value="Submit" className="submitButton"/>
         </form>
     );

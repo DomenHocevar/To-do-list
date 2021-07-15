@@ -13,7 +13,7 @@ export default function Sidebar(props) {
         return projects.map(project => {
             return (
             <ProjectDropDown project={project} key={project.key} onProjectClick={handleProjectClick}
-            shouldHighlight={props.showProjectKey === project.key}></ProjectDropDown>);
+            shouldHighlight={props.showProject === project}></ProjectDropDown>);
         });
     }
 

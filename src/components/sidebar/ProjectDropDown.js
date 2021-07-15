@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 const WrapperHiglightedComponent = styled(Wrapper)`
     &&& .dropDownMenu > :nth-child(1) {
         color: yellow;
+        background-color: rgb(45, 101, 138);
     }
 `
 

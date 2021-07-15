@@ -1,7 +1,15 @@
 
 #toDosSection > h2 {
     color: white;
+    
     border-bottom: 2px solid white;
+}
+
+#toDosSection > h2 > button {
+    float: right;
+    margin-right: 20px;
+    font-size: 20px;
+    border: none;
 }
 
 #toDosSection {

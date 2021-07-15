@@ -6,7 +6,7 @@ export default function FormContainer(props) {
 
     function handleFormContainerBackgroundClick(event) {
         if (event.target.id === "formContainerBackground") {
-            props.turnOffProjectForm();
+            props.turnOffForm();
         }
     }
 
@@ -15,7 +15,7 @@ export default function FormContainer(props) {
     return (
         <div id="formContainerBackground" onClick={handleFormContainerBackgroundClick}>
             <div id="formContainer">
-                <button onClick={props.turnOffProjectForm}>X</button>
+                <button onClick={props.turnOffForm}>X</button>
                 {props.form}
             </div>
         </div>

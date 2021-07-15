@@ -2,24 +2,39 @@ import Project from "./Project";
 
 
 export default function ProjectsStorage() {
-    const projects = [];
-    let nextProjectKey = 0;
+    this.projects = [];
+    this.nextProjectKey = 0;
 
     function addProject(title) {
-        projects.push(Project(title, nextProjectKey));
-        nextProjectKey++;
+        this.projects.push(new Project(title, this.nextProjectKey));
+        this.nextProjectKey++;
     }
 
     function removeProject(key) {
         let target = -1;
-        for (let i = 0; i < projects.length; i++) {
-            if (projects[i].key == key) {
+        for (let i = 0; i < this.projects.length; i++) {
+            if (this.projects[i].key == key) {
                 target = i;
                 break;
             }
         }
-        projects.splice(target, 1);
+        this.projects.splice(target, 1);
     }
 
-    return {projects, addProject, removeProject};
+}
+
+ProjectsStorage.prototype.addProject = function(title) {
+    this.projects.push(new Project(title, this.nextProjectKey));
+    this.nextProjectKey++;
+}
+
+ProjectsStorage.prototype.removeProject = function(key) {
+    let target = -1;
+    for (let i = 0; i < this.projects.length; i++) {
+        if (this.projects[i].key == key) {
+            target = i;
+            break;
+        }
+    }
+    this.projects.splice(target, 1);
 }
