@@ -4,6 +4,7 @@ import "./ToDosSection.css";
 
 export default function ToDosSection(props) {
 
+    console.log(props.project.toDos);
 
     return (
         <section id="toDosSection">
@@ -14,9 +15,9 @@ export default function ToDosSection(props) {
                 </button>
             </h2>
             <div id="toDosContainer">
-                <ToDosByPriority/>
-                <ToDosByPriority/>
-                <ToDosByPriority/>
+                <ToDosByPriority toDos={props.project.toDos} priority={3}/>
+                <ToDosByPriority toDos={props.project.toDos} priority={2}/>
+                <ToDosByPriority toDos={props.project.toDos} priority={1}/>
             </div>
         </section>
     );

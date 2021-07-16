@@ -1,0 +1,58 @@
+
+.toDoBlock {
+    
+    width: 23vw;
+    min-height: 70px;
+    min-width: 70px;
+    margin: 20px auto;
+    background-color: darkgrey;
+    border: 4px solid black;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.toDoBlock > :nth-child(even) {
+    margin-left: 10px;
+    justify-self: start;
+}
+
+
+
+
+
+
+
+.toDoBlockDelete {
+    justify-self: start;   
+    background-color: rgb(247, 71, 71);
+}
+
+.toDoBlockEdit {
+    justify-self: end;
+}
+
+.toDoBlockDelete, .toDoBlockEdit {
+    margin: 5px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.toDoBlock label {
+    display: flex;
+    align-items: center;
+}
+
+.toDoBlockDoneInput {
+    width: 20px;
+    height: 20px;
+}
+
+.toDoBlockTitle {
+    grid-column: 1 / 3;
+    border-bottom: 2px solid lightsalmon;
+    background-color: lightblue;
+    margin-top: 0;
+    font-size: 150%;
+    padding: 5px;
+}

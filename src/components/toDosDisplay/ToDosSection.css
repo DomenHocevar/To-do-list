@@ -21,13 +21,14 @@
 }
 
 #toDosContainer {
-    display: flex;
-    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
     min-height: calc(85vh - 92px);
     margin-top: 0;
 }
 
-#toDosContainer :nth-child(2) {
+#toDosContainer > :nth-child(2) {
     border-left: 2px solid white;
     border-right: 2px solid white;
 }

@@ -2,6 +2,9 @@
 
 
 .toDosByPriority {
-    
+    position: relative;
+    box-sizing: border-box;
+    flex-basis: auto;
     flex-grow: 1;
+    overflow: hidden;
 }

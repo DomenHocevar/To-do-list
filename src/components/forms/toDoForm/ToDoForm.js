@@ -33,7 +33,11 @@ export default function ToDoForm(props) {
         event.preventDefault();
 
         const attributesObject = {
-            title: toDoTitleInput
+            title: toDoTitleInput,
+            priority: priorityInput,
+            description: descriptionInput,
+            date: dateInput, 
+            done: doneInput
         }
 
         props.onSubmit(attributesObject);
