@@ -41,6 +41,7 @@ export default function App() {
   }
 
   function turnOffForm() {
+    setEditedToDo(null);
     setShowFormType("");
   }
 
@@ -81,7 +82,27 @@ export default function App() {
   }
 
   function handleEditToDoFormSubmit(attributesObject) {
+    const projectsStorageCopy = _.cloneDeep(projectsStorage);
+    let showProjectCopy = projectsStorageCopy.projects[0];
+    projectsStorageCopy.projects.forEach(project => {
+      if (project.key === showProject.key) showProjectCopy = project;
+    })
 
+    const newToDo = ToDo();
+    Object.keys(attributesObject).forEach(function(key) {
+      newToDo[key] = attributesObject[key];
+    });
+
+
+    for (let i = 0; i < showProject.toDos.length; i++) {
+      if (showProjectCopy.toDos[i].key === editedToDo.key) {
+        showProjectCopy.toDos.splice(i, 1, newToDo);
+        break;
+      }
+    }
+
+    setProjectsStorage(projectsStorageCopy);
+    setShowProject(showProjectCopy);
   }
 
   function handleProjectClick(project) {
@@ -98,7 +119,42 @@ export default function App() {
     turnOnToDoForm();
   }
 
+  function handleToDoBlockDoneChange(event, targetToDo) {    
+    const projectsStorageCopy = _.cloneDeep(projectsStorage);
+    let newShowProject = null;
+    projectsStorageCopy.projects.forEach(project => {
+      if (project.key === showProject.key) {
+        newShowProject = project;
+        project.toDos.forEach(toDo => {
+          if (toDo.key === targetToDo.key) {
+            toDo.done = event.target.checked;
+          }
+        })
+      }
+    });
 
+    setProjectsStorage(projectsStorageCopy);
+    setShowProject(newShowProject);
+  }
+
+  function handleToDoBlockDeleteClick(targetToDo) {
+    const projectsStorageCopy = _.cloneDeep(projectsStorage);
+    let newShowProject = null;
+    projectsStorageCopy.projects.forEach(project => {
+      if (project.key === showProject.key) {
+        newShowProject = project;
+        project.removeToDo(targetToDo.key);
+      }
+    });
+
+    setProjectsStorage(projectsStorageCopy);
+    setShowProject(newShowProject);
+  }
+
+  function handleToDoBlockEditClick(targetToDo) {
+    setEditedToDo(targetToDo);
+    turnOnToDoForm();
+  }
 
   return (
 
@@ -106,12 +162,18 @@ export default function App() {
         {console.log(projectsStorage.projects)}
         <Header/>
         <div id="sidebarAndToDosSection">
+
           <Sidebar projects={projectsStorage.projects}
           turnOnProjectForm={turnOnProjectForm}
           onProjectClick={handleProjectClick}
           showProject={showProject}/>
+
           <ToDosSection project={showProject}
-          onAddToDoClick={handleAddToDoClick}/>
+          onAddToDoClick={handleAddToDoClick}
+          onToDoBlockDoneChange={handleToDoBlockDoneChange}
+          onToDoBlockDeleteClick={handleToDoBlockDeleteClick}
+          onToDoBlockEditClick={handleToDoBlockEditClick}
+          />
         </div>
         {showFormType === "project" && <FormContainer turnOffForm={turnOffForm} form={<ProjectForm onSubmit={handleProjectFormSubmit} turnOffProjectForm={turnOffForm}/>}/>}
         {showFormType === "toDo" && <FormContainer turnOffForm={turnOffForm} form={<ToDoForm onSubmit={handleToDoFormSubmit} turnOffToDoForm={turnOffForm}

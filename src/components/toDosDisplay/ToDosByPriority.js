@@ -14,7 +14,8 @@ export default function ToDosByPriority(props) {
     toDosCopy.forEach(toDo => {
         console.log(toDo.priority)
         if (toDo.priority == props.priority) {
-            content.push(<ToDoBlock toDo={toDo} key={toDo.key}/>)
+            content.push(<ToDoBlock toDo={toDo} key={toDo.key} onToDoBlockDoneChange={props.onToDoBlockDoneChange}
+                onToDoBlockDeleteClick={props.onToDoBlockDeleteClick} onToDoBlockEditClick={props.onToDoBlockEditClick}/>)
         }
     })
     

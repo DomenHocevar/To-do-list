@@ -15,9 +15,12 @@ export default function ToDosSection(props) {
                 </button>
             </h2>
             <div id="toDosContainer">
-                <ToDosByPriority toDos={props.project.toDos} priority={3}/>
-                <ToDosByPriority toDos={props.project.toDos} priority={2}/>
-                <ToDosByPriority toDos={props.project.toDos} priority={1}/>
+                <ToDosByPriority toDos={props.project.toDos} priority={3} onToDoBlockDoneChange={props.onToDoBlockDoneChange}
+                onToDoBlockDeleteClick={props.onToDoBlockDeleteClick} onToDoBlockEditClick={props.onToDoBlockEditClick}/>
+                <ToDosByPriority toDos={props.project.toDos} priority={2} onToDoBlockDoneChange={props.onToDoBlockDoneChange}
+                onToDoBlockDeleteClick={props.onToDoBlockDeleteClick} onToDoBlockEditClick={props.onToDoBlockEditClick}/>
+                <ToDosByPriority toDos={props.project.toDos} priority={1} onToDoBlockDoneChange={props.onToDoBlockDoneChange}
+                onToDoBlockDeleteClick={props.onToDoBlockDeleteClick} onToDoBlockEditClick={props.onToDoBlockEditClick}/>
             </div>
         </section>
     );
