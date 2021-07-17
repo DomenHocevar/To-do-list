@@ -7,12 +7,10 @@ export default function ToDosByPriority(props) {
 
     const content = [];
     const toDosCopy = props.toDos.slice();
-    if (props.priority == 3) console.log(toDosCopy);
     toDosCopy.sort(ToDo_compareByDate);
-    if (props.priority == 3) console.log(toDosCopy);
+    
 
     toDosCopy.forEach(toDo => {
-        console.log(toDo.priority)
         if (toDo.priority == props.priority) {
             content.push(<ToDoBlock toDo={toDo} key={toDo.key} onToDoBlockDoneChange={props.onToDoBlockDoneChange}
                 onToDoBlockDeleteClick={props.onToDoBlockDeleteClick} onToDoBlockEditClick={props.onToDoBlockEditClick}/>)

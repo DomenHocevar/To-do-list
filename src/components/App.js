@@ -11,9 +11,11 @@ import ProjectForm from './forms/projectForm/ProjectForm';
 import ToDosSection from './toDosDisplay/ToDosSection';
 import ToDoForm from './forms/toDoForm/ToDoForm';
 import _ from 'lodash';
+import ToDoWithKey from 'logic/ToDoWithKey';
+import ProjectsStorageFromLocalStorage from 'logic/ProjectsStorageFromLocalStorage';
 
 export default function App() {
-  const [projectsStorage, setProjectsStorage] = useState(initProjectsStorage());
+  const [projectsStorage, setProjectsStorage] = useState(localStorage.getItem("projectsStorage") ?  new ProjectsStorageFromLocalStorage(JSON.parse(localStorage.getItem("projectsStorage"))) : initProjectsStorage());
   const [showFormType, setShowFormType] = useState("");
   const [showProject, setShowProject] = useState(null);
   const [editedToDo, setEditedToDo] = useState(null);
@@ -25,9 +27,19 @@ export default function App() {
     setShowProject(null);
   }
 
+  function setProjectsStorageAndLocalStorage(projectsStorage) {
+    setProjectsStorage(projectsStorage);
+    localStorage.setItem("projectsStorage", JSON.stringify(projectsStorage));
+  }
+
+  console.log(projectsStorage);
+  console.log(showProject);
+
   function initProjectsStorage() {
     const projectsStorage = new ProjectsStorage();
     projectsStorage.addProject("Default");
+    
+    localStorage.setItem("projectsStorage", JSON.stringify(projectsStorage));
     
     return projectsStorage;
   }
@@ -50,7 +62,7 @@ export default function App() {
   function handleProjectFormSubmit(attributesObject) {
     const projectsStorageCopy = _.cloneDeep(projectsStorage);
     projectsStorageCopy.addProject(attributesObject.title);
-    setProjectsStorage(projectsStorageCopy);
+    setProjectsStorageAndLocalStorage(projectsStorageCopy);
     setShowProject(projectsStorageCopy.projects[projectsStorageCopy.projects.length - 1]);
   }
 
@@ -77,7 +89,8 @@ export default function App() {
     });
     showProjectCopy.addToDo(toDo);
 
-    setProjectsStorage(projectsStorageCopy);
+
+    setProjectsStorageAndLocalStorage(projectsStorageCopy);
     setShowProject(showProjectCopy);
   }
 
@@ -93,15 +106,14 @@ export default function App() {
       newToDo[key] = attributesObject[key];
     });
 
-
     for (let i = 0; i < showProject.toDos.length; i++) {
       if (showProjectCopy.toDos[i].key === editedToDo.key) {
-        showProjectCopy.toDos.splice(i, 1, newToDo);
+        showProjectCopy.toDos.splice(i, 1, ToDoWithKey(newToDo, editedToDo.key));
         break;
       }
     }
 
-    setProjectsStorage(projectsStorageCopy);
+    setProjectsStorageAndLocalStorage(projectsStorageCopy);
     setShowProject(showProjectCopy);
   }
 
@@ -133,7 +145,7 @@ export default function App() {
       }
     });
 
-    setProjectsStorage(projectsStorageCopy);
+    setProjectsStorageAndLocalStorage(projectsStorageCopy);
     setShowProject(newShowProject);
   }
 
@@ -147,7 +159,7 @@ export default function App() {
       }
     });
 
-    setProjectsStorage(projectsStorageCopy);
+    setProjectsStorageAndLocalStorage(projectsStorageCopy);
     setShowProject(newShowProject);
   }
 
@@ -159,7 +171,6 @@ export default function App() {
   return (
 
     <div id="content">
-        {console.log(projectsStorage.projects)}
         <Header/>
         <div id="sidebarAndToDosSection">
 

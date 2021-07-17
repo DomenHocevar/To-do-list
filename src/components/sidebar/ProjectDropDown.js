@@ -47,7 +47,6 @@ export default function ProjectDropDown(props) {
             childrenComponents={getChildrenComponents(props.project)}/>
     );
 
-    console.log(props.shouldHighlight);
     if (props.shouldHighlight) {
         return (
             <WrapperHiglightedComponent>

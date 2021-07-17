@@ -9,7 +9,6 @@ export default function Sidebar(props) {
     }
 
     function getProjectComponents(projects) {
-        console.log(projects);
         return projects.map(project => {
             return (
             <ProjectDropDown project={project} key={project.key} onProjectClick={handleProjectClick}

@@ -1,11 +1,11 @@
 
 import ToDoWithKey from "./ToDoWithKey";
 
-export default function Project(inputTitle, inputKey) {
-    const title = inputTitle;
-    this.toDos = [];
-    const key = inputKey;
-    this.nextToDoKey = 0;
+export default function ProjectFromLocalStorage(localStorageCopy) {
+    const title = localStorageCopy.title;
+    this.toDos = localStorageCopy.toDos;
+    const key = localStorageCopy.key;
+    this.nextToDoKey = localStorageCopy.nextToDoKey;
 
     function addToDo(toDo) {
         this.toDos.push(ToDoWithKey(toDo, this.nextToDoKey));
@@ -25,4 +25,3 @@ export default function Project(inputTitle, inputKey) {
 
     return {title, toDos: this.toDos, key, addToDo, removeToDo, nextToDoKey: this.nextToDoKey};
 }
-

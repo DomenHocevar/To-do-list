@@ -4,8 +4,6 @@ import "./ToDosSection.css";
 
 export default function ToDosSection(props) {
 
-    console.log(props.project.toDos);
-
     return (
         <section id="toDosSection">
             <h2>
