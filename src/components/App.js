@@ -32,8 +32,6 @@ export default function App() {
     localStorage.setItem("projectsStorage", JSON.stringify(projectsStorage));
   }
 
-  console.log(projectsStorage);
-  console.log(showProject);
 
   function initProjectsStorage() {
     const projectsStorage = new ProjectsStorage();
