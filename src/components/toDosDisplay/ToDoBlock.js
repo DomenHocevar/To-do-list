@@ -10,7 +10,7 @@ export default function ToDoBlock(props) {
             <h3 className="toDoBlockTitle">{props.toDo.title}</h3>
             <label>Done: <input className="toDoBlockDoneInput" type="checkbox" checked={props.toDo.done}
             onChange={(event) => props.onToDoBlockDoneChange(event, props.toDo)}/></label>
-            <div>
+            <div className="toDoBlockDateDiv">
                 Date: {props.toDo.date}
             </div>
             <button className="toDoBlockDelete" onClick={() => props.onToDoBlockDeleteClick(props.toDo)}>Delete</button>

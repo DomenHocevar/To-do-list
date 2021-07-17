@@ -13,6 +13,19 @@ const Wrapper = styled.div`
     &&& button {
         cursor: pointer;
     }
+
+    &&& .dropDownMenu > :nth-child(1) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &&&&& .dropDownMenu > :nth-child(1) .projectDeleteButton{
+        margin-right: 10px;
+        background-color: rgb(247, 71, 71);
+        width: fit-content;
+        color:white;
+        padding: 2px;
+    }
 `
 
 const WrapperHiglightedComponent = styled(Wrapper)`
@@ -23,17 +36,33 @@ const WrapperHiglightedComponent = styled(Wrapper)`
 `
 
 
+const WrapperDefaultProjectHeadingComponent = styled.div`
+    &&& .dropDownMenu > :nth-child(1) {
+        display: initial;
+    }
+`
+
+
 
 export default function ProjectDropDown(props) {
     
-    function handleProjectClick() {
+    function handleProjectClick(event) {
+        if (event.target.className === "projectDeleteButton") return;
         props.onProjectClick(props.project);
     }
 
     function getHeadingComponent(project) {
-        return <button onClick={handleProjectClick}>
-            {project.title}
-        </button>;
+        return  (
+                <button onClick={handleProjectClick}>
+                    { project.key != 0 &&
+                    <div className="projectDeleteButton" onClick = {() => props.onProjectDeleteClick(project)}>
+                        delete
+                    </div>
+                    }  
+                    {project.title}
+                </button>
+            
+        );
     }
 
     function getChildrenComponents(project) {
@@ -42,22 +71,26 @@ export default function ProjectDropDown(props) {
         return components;
     }
 
-    const InnerContent = (
+    let innerContent = (
         <DropDownMenu headingComponent={getHeadingComponent(props.project)}
             childrenComponents={getChildrenComponents(props.project)}/>
     );
 
+    if (props.project.key === 0) {
+        innerContent = <WrapperDefaultProjectHeadingComponent> {innerContent} </WrapperDefaultProjectHeadingComponent>;
+    }
+
     if (props.shouldHighlight) {
         return (
             <WrapperHiglightedComponent>
-                {InnerContent}
+                {innerContent}
             </WrapperHiglightedComponent>
         );
     }
 
     return (
         <Wrapper>
-            {InnerContent}
+            {innerContent}
         </Wrapper>
     );
 }

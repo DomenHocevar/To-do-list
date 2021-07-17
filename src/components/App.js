@@ -159,6 +159,7 @@ export default function App() {
       }
     });
 
+    if (newShowProject === null) newShowProject = projectsStorageCopy.projects[0];
     setProjectsStorageAndLocalStorage(projectsStorageCopy);
     setShowProject(newShowProject);
   }
@@ -166,6 +167,26 @@ export default function App() {
   function handleToDoBlockEditClick(targetToDo) {
     setEditedToDo(targetToDo);
     turnOnToDoForm();
+  }
+
+  function handleProjectDeleteClick(targetProject) {
+    const projectsStorageCopy = _.cloneDeep(projectsStorage);
+    let newShowProject = null;
+    for (let i = 0; i < projectsStorageCopy.projects.length; i++) {
+      if (projectsStorageCopy.projects[i].key === targetProject.key) {
+        projectsStorageCopy.projects.splice(i, 1);
+      }
+    }
+    for (let i = 0; i < projectsStorageCopy.projects.length; i++) {
+      if (projectsStorageCopy.projects[i].key === showProject.key) {
+        newShowProject = projectsStorageCopy.projects[i];
+      }
+    }
+
+
+    if (newShowProject === null) newShowProject = projectsStorageCopy.projects[0];
+    setProjectsStorageAndLocalStorage(projectsStorageCopy);
+    setShowProject(newShowProject);
   }
 
   return (
@@ -177,7 +198,8 @@ export default function App() {
           <Sidebar projects={projectsStorage.projects}
           turnOnProjectForm={turnOnProjectForm}
           onProjectClick={handleProjectClick}
-          showProject={showProject}/>
+          showProject={showProject}
+          onProjectDeleteClick={handleProjectDeleteClick}/>
 
           <ToDosSection project={showProject}
           onAddToDoClick={handleAddToDoClick}

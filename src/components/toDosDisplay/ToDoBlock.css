@@ -43,6 +43,11 @@
     align-items: center;
 }
 
+.toDoBlock .toDoBlockDateDiv {
+    display: flex;
+    align-items: center;
+}
+
 .toDoBlockDoneInput {
     width: 20px;
     height: 20px;
